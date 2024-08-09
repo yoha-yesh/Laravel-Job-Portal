@@ -14,7 +14,7 @@ class UserController extends Controller
     public function store(Request $request){
         $request->validate([
             'name' => ['required','string', 'min:5'],
-            'email'=> ['required', 'email' ,Rule::unique('user')],
+            'email'=> ['required', 'email' ,Rule::unique('users')],
             'password' => ['required', 'confirmed' ,'min:4']
         ]);
 
@@ -30,7 +30,7 @@ class UserController extends Controller
 
 
 
-    } 
+    }
 
     public function logged(Request $request){
         $request->validate([
@@ -46,7 +46,7 @@ class UserController extends Controller
         else{
             return back()->with('error', "Invalid Email or Password");
         }
-        
+
 
     }
 }
