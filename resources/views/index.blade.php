@@ -18,14 +18,19 @@
                 <p class="text-2xl text-gray-200 font-bold my-4">
                     Find or post Laravel jobs & projects
                 </p>
+                @auth
+                <span class="bold uppercase text-black">welcome {{auth()->user()->name}}</span>
+                @else
                 <div>
                     <a
-                        href=""
+                        href="{{route('register')}}"
                         class="inline-block border-2 border-white text-white py-2 px-4 rounded-xl uppercase mt-2 hover:text-black hover:border-black"
                         >Sign Up to List a Gig</a
                     >
                     
                 </div>
+                @endauth
+                
             </div>
         </section>
 

@@ -12,6 +12,8 @@
             crossorigin="anonymous"
             referrerpolicy="no-referrer"
         />
+        @vite('resources/css/app.css')
+
         <script src="https://cdn.tailwindcss.com"></script>
         <script>
             tailwind.config = {
@@ -27,25 +29,7 @@
         <title>LaraGigs | Find Laravel Jobs & Projects</title>
     </head>
     <body class="mb-48">
-        <nav class="flex justify-between items-center mb-4">
-            <a href="index.html"
-                ><img class="w-24" src="images/logo.png" alt="" class="logo"
-            /></a>
-            <ul class="flex space-x-6 mr-6 text-lg">
-                <li>
-                    <a href="manage.html" class="hover:text-laravel"
-                        ><i class="fa-solid fa-gear"></i> Manage Gigs</a
-                    >
-                </li>
-                <li>
-                    <form action="index.html">
-                        <button>
-                            <i class="fa-solid fa-door-closed"></i> Logout
-                        </button>
-                    </form>
-                </li>
-            </ul>
-        </nav>
+        <x-nav></x-nav>
 
         <main>
             <div class="mx-4">
@@ -59,7 +43,12 @@
                         <p class="mb-4">Post a gig to find a developer</p>
                     </header>
 
-                    <form action="">
+                    @if(session('message'))
+                    <div class="bg-green-500">{{session('message')}}</div>
+                    @endif
+
+                    <form action="{{route('create.job')}}" method="post">
+                        @csrf
                         <div class="mb-6">
                             <label
                                 for="company"
@@ -164,7 +153,8 @@
 
                         <div class="mb-6">
                             <button
-                                class="bg-laravel text-white rounded py-2 px-4 hover:bg-black"
+                                class="bg-laravel text-white rounded py-2 px-4 hover:bg-black" 
+                                type="submit"
                             >
                                 Create Gig
                             </button>
@@ -182,7 +172,7 @@
             <p class="ml-2">Copyright &copy; 2022, All Rights reserved</p>
 
             <a
-                href="create.html"
+                href="{{route('create.job')}}"
                 class="absolute top-1/3 right-10 bg-black text-white py-2 px-5"
                 >Post Job</a
             >

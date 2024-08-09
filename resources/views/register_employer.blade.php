@@ -1,6 +1,7 @@
 @extends('layout.app')
+
 @section('content')
-        <x-nav></x-nav>
+       <x-nav></x-nav>
 
         <main>
             <div class="mx-4">
@@ -9,33 +10,31 @@
                 >
                     <header class="text-center">
                         <h2 class="text-2xl font-bold uppercase mb-1">
-                            Log In
+                            Register
                         </h2>
-                        <p class="mb-4">Log in to post gigs</p>
+                        <p class="mb-4">Create an account to post gigs</p>
                     </header>
 
-                    <form action="/login" method="post">
+                    <form method="post" action="{{route('create.employer')}}" >
                         @csrf
+                        <div class="mb-6">
+                            <label for="name" class="inline-block text-lg mb-2">
+                                Name
+                            </label>
+                            <input
+                                type="text"
+                                class="border border-gray-200 rounded p-2 w-full"
+                                name="name"
+                                value="{{old('name')}}"
+                            />
 
-                    @if(session('success'))
-                        <div class="w-100% bg-green-500 text-center p-5 mb-5">
-                             <p class="text-white text-center w-100%">{{session('success')}}</p>
+                            <!-- ERROR -->
+                             @if($errors->has('name'))
+                                <p class="text-red-700 font-xs">{{$errors->first('name')}}</p>
+                             @endif
+                             
                         </div>
-                        @endif
 
-                        @if(session('error'))
-                        <div class="w-100% bg-red-500 text-center p-5 mb-4">
-                             <p class="text-white text-center w-100%">{{session('error')}}</p>
-                        </div>
-                        @endif
-
-                        @if(session('message'))
-                        <div class="w-100% bg-green-500 text-center p-5 mb-4">
-                             <p class="text-white text-center w-100%">{{session('message')}}</p>
-                        </div>
-                        @endif
-
-                        
                         <div class="mb-6">
                             <label for="email" class="inline-block text-lg mb-2"
                                 >Email</label
@@ -44,12 +43,14 @@
                                 type="email"
                                 class="border border-gray-200 rounded p-2 w-full"
                                 name="email"
+                                value="{{old('email')}}"
                             />
 
                             <!-- ERROR -->
                             @if($errors->has('email'))
                                 <p class="text-red-700 font-xs">{{$errors->first('email')}}</p>
                              @endif
+                           
                         </div>
 
                         <div class="mb-6">
@@ -63,11 +64,27 @@
                                 type="password"
                                 class="border border-gray-200 rounded p-2 w-full"
                                 name="password"
+                                value="{{old('password')}}"
                             />
                             <!-- ERROR -->
-                            @if($errors->has('email'))
-                                <p class="text-red-700 font-xs">{{$errors->first('email')}}</p>
+                             @if($errors->has('password'))
+                                <p class="text-red-700 font-xs">{{$errors->first('password')}}</p>
                              @endif
+                        </div>
+                        
+
+                        <div class="mb-6">
+                            <label
+                                for="password2"
+                                class="inline-block text-lg mb-2"
+                            >
+                                Confirm Password
+                            </label>
+                            <input
+                                type="password"
+                                class="border border-gray-200 rounded p-2 w-full"
+                                name="password_confirmation"
+                            />
                         </div>
 
                         <div class="mb-6">
@@ -75,15 +92,15 @@
                                 type="submit"
                                 class="bg-laravel text-white rounded py-2 px-4 hover:bg-black"
                             >
-                                Sign In
+                                Sign Up
                             </button>
                         </div>
 
                         <div class="mt-8">
                             <p>
-                                Don't have an account?
-                                <a href="/register" class="text-laravel"
-                                    >Register</a
+                                Already have an account?
+                                <a href="/login" class="text-laravel"
+                                    >Login</a
                                 >
                             </p>
                         </div>
@@ -92,5 +109,5 @@
             </div>
         </main>
 
-       <x-footer></x-footer>
- @endsection
+        <x-footer></x-footer>
+  @endsection

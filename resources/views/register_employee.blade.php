@@ -12,10 +12,10 @@
                         <h2 class="text-2xl font-bold uppercase mb-1">
                             Register
                         </h2>
-                        <p class="mb-4">Create an account to post gigs</p>
+                        <p class="mb-4">Create an account to apply for jobs</p>
                     </header>
 
-                    <form method="post" action="/create" >
+                    <form method="post" action="{{route('create.employee')}}" >
                         @csrf
                         <div class="mb-6">
                             <label for="name" class="inline-block text-lg mb-2">
