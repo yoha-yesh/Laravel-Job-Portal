@@ -6,6 +6,7 @@ use App\Models\LaraJobs;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [JobController::class, 'index']);
+Route::get('/jobs/{job}', [JobController::class, 'show']);
 
 Route::get('/register', function () {
     return view('register_employer');
@@ -54,7 +55,7 @@ Route::post('create/job', [JobController::class, 'storeJob'])->name('create.job'
 
 
 // Route::get('/?tag={tag}', function($tag){
-    
+
 //     dd(LaraJobs::where('tags', $))
 
 
