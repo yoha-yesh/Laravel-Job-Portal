@@ -13,10 +13,12 @@
             referrerpolicy="no-referrer"
         />
         @vite('resources/css/app.css')
-       
+        @vite('resources/js/app.js')
+
         <title>LaraGigs | Find Laravel Jobs & Projects</title>
     </head>
     <body class="mb-48">
         @yield('content')
+        <x-popup/>
     </body>
 </html>
