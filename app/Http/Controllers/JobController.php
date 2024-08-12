@@ -9,20 +9,10 @@ class JobController extends Controller
 {
 
     public function index(){
-        $filters = request(['tag']);
         return view('index', [
-            
-            
-            'larajobs' => LaraJobs::all()
-            // ->filter(function($filters){
-            //     if($filters['tag']){
-            //         return LaraJobs::all()->where('tags', 'like', '%'.request('tag'). "%");
-
-            //     }
-               
-                
-            // }
-            // )
+            'larajobs' => LaraJobs::latest()
+                ->filter(request(['tag']))
+                ->get(),
         ]);
     }
 
@@ -40,7 +30,11 @@ class JobController extends Controller
         ]);
 
         return back()->with('message', 'created succesfully');
+    }
 
-        
+    public function show(LaraJobs $job) {
+        return view('show', [
+            'job' => $job,
+        ]);
     }
 }

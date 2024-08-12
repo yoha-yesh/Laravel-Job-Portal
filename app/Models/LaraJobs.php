@@ -9,13 +9,11 @@ class LaraJobs extends Model
 {
     use HasFactory;
 
-    public function filterJobs($query ,array $filters){
-        if($filters['tag']){
-            $query->where('tags', 'like', '%'.request('tag'). "%");
-        
-
+    public function scopeFilter($query ,array $filters){
+        if($filters['tag'] ?? false){
+            $query->where('tags', 'like', '%' . request('tag') . '%');
+        }
     }
-}
 
     protected $fillable =[
         'title',
