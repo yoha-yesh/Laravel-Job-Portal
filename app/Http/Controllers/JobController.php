@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\LaraJobs;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
 class JobController extends Controller
@@ -18,18 +19,23 @@ class JobController extends Controller
 
 
     public function storeJob(Request $request) {
-        LaraJobs::create([
-            'title' =>$request->title,
-            'tags' =>$request->tags,
-            'company' =>$request->company,
-            'location' =>$request->location,
-            'email'  =>$request->email,
-            'website' =>$request->website,
-            'description' =>$request->description
-
+        $validator = Validator::make($request->all(), [
+            'title' => 'required',
+            'tags' => 'required',
+            'company' => 'required',
+            'location' => 'required',
+            'email'  => ['required', 'email'],
+            'website' => 'required',
+            'description' => 'required',
         ]);
 
-        return back()->with('message', 'created succesfully');
+        if($validator->fails()) {
+            return redirect('/create')->withErrors($validator)->withInput();
+        }
+
+        LaraJobs::create($validator->validated());
+
+        return redirect('/')->with('message', 'created succesfully');
     }
 
     public function show(LaraJobs $job) {
