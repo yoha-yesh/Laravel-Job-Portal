@@ -11,7 +11,7 @@ class JobController extends Controller
     public function index(){
         return view('index', [
             'larajobs' => LaraJobs::latest()
-                ->filter(request(['tag']))
+                ->filter(request(['tag', 'search']))
                 ->get(),
         ]);
     }
