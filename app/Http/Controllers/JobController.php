@@ -43,4 +43,33 @@ class JobController extends Controller
             'job' => $job,
         ]);
     }
+
+//Update job 
+    public function UpdateJob(Request $request ,$id) {
+        $validator = Validator::make($request->all(), [
+            'title' => 'required',
+            'tags' => 'required',
+            'company' => 'required',
+            'location' => 'required',
+            'email'  => ['required', 'email'],
+            'website' => 'required',
+            'description' => 'required',
+        ]);
+
+        $larajob = LaraJobs::find($id);
+
+    $larajob->update([
+        'title' => $request['title'],
+        'tags' => $request['tags'],
+        'company' => $request['company'],
+        'location' => $request['location'],
+        'email' => $request['email'],
+        'website' => $request['website'],
+        'description' => $request['description']
+
+    ]);
+
+    return back()->with('message', 'Succesfully updated');
+
+    }
 }

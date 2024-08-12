@@ -1,9 +1,10 @@
 <?php
 
+use App\Models\LaraJobs;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\UserController;
-use App\Models\LaraJobs;
-use Illuminate\Support\Facades\Route;
 
 Route::get('/', [JobController::class, 'index']);
 Route::get('/jobs/{job}', [JobController::class, 'show']);
@@ -22,10 +23,6 @@ Route::get('/login', function () {
 
 
 
-
-Route::get('/dashboard', function () {
-    return view('userDashboard');
-});
 
 
 
@@ -64,7 +61,25 @@ Route::post('create/job', [JobController::class, 'storeJob'])->name('create.job'
 
 
 
+//MANAGE JOBS ROUTE
+
+Route::get('manage', function(){
+    return view('manage', [
+        "LaraJobs" => LaraJobs::all()
+    ]);
+})->name('manage');
 
 
+//EDIT THE JOB PAGE DISPLAY ROUTE
+
+Route::get('/job/edit/{id}', function($id){
+    return view('edit', [
+        "larajob" => LaraJobs::find($id)
+    ]);
+});
+
+
+//Edit the job
+Route::put('update/job/{id}', [JobController::class, 'updateJob'])->name('update.job')
 
 ?>

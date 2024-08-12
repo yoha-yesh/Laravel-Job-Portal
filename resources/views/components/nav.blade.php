@@ -5,7 +5,7 @@
             <ul class="flex space-x-6 mr-6 text-lg">
             @auth
             <li>
-                    <a href="manage.html" class="hover:text-laravel"
+                    <a href="{{route('manage')}}" class="hover:text-laravel"
                         ><i class="fa-solid fa-gear"></i> Manage Gigs</a
                     >
                 </li>
