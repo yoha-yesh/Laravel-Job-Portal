@@ -12,7 +12,7 @@ class JobController extends Controller
         return view('index', [
             'larajobs' => LaraJobs::latest()
                 ->filter(request(['tag', 'search']))
-                ->get(),
+                ->paginate(6),
         ]);
     }
 

@@ -38,16 +38,14 @@
             <!-- Search -->
             <x-search/>
             <div
-                class="lg:grid lg:grid-cols-2 gap-4 space-y-4 md:space-y-0 mx-4"
+                class="lg:grid lg:grid-cols-2 gap-4 space-y-4 md:space-y-0 mx-4 my-4"
             >
 
             @foreach ($larajobs as $larajob)
         <x-cards :larajob="$larajob"></x-cards>
     @endforeach
             </div>
-
-
-
+            {{$larajobs->links()}}
 
         </main>
 
