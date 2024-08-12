@@ -72,4 +72,13 @@ class JobController extends Controller
     return back()->with('message', 'Succesfully updated');
 
     }
+
+
+    //DELETE JOB
+    public function deleteJob($id){
+        $larajob = LaraJobs::find($id);
+        $larajob->delete();
+        return back();
+
+    }
 }

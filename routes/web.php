@@ -80,6 +80,10 @@ Route::get('/job/edit/{id}', function($id){
 
 
 //Edit the job
-Route::put('update/job/{id}', [JobController::class, 'updateJob'])->name('update.job')
+Route::put('update/job/{id}', [JobController::class, 'updateJob'])->name('update.job');
+
+//DELETE THE JOB
+Route::delete('delete/job/{id}', [JobController::class, 'deleteJob'])->name('delete.job');
+
 
 ?>

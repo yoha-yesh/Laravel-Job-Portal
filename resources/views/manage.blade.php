@@ -69,7 +69,9 @@
                                     <td
                                         class="px-4 py-8 border-t border-b border-gray-300 text-lg"
                                     >
-                                        <form action="">
+                                        <form action="{{route('delete.job', $larajob->id)}}" method="post">
+                                            @csrf
+                                            @method('delete')
                                             <button class="text-red-600">
                                                 <i
                                                     class="fa-solid fa-trash-can"
