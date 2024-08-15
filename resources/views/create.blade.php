@@ -18,7 +18,7 @@
                     <div class="bg-green-500">{{session('message')}}</div>
                     @endif
 
-                    <form action="{{route('create.job')}}" method="post">
+                    <form action="{{route('create.job')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-6">
                             <label

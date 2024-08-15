@@ -27,7 +27,8 @@ class LaraJobs extends Model
         'location',
         'email',
         'website',
-        'description'
+        'description',
+        'logo',
 
     ];
 }

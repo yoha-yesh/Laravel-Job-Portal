@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\LaraJobs;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules\File;
 
 class JobController extends Controller
 {
@@ -27,13 +28,20 @@ class JobController extends Controller
             'email'  => ['required', 'email'],
             'website' => 'required',
             'description' => 'required',
+            'logo' => File::types(['jpg', 'png', 'svg'])->max(1024),
         ]);
 
         if($validator->fails()) {
             return redirect('/create')->withErrors($validator)->withInput();
         }
 
-        LaraJobs::create($validator->validated());
+        $formFields = $validator->validated();
+
+        if ($request->hasFile('logo')) {
+            $formFields['logo'] = $request->file('logo')->store('logos', 'public');
+        }
+
+        LaraJobs::create($formFields);
 
         return redirect('/')->with('message', 'created succesfully');
     }
@@ -44,7 +52,7 @@ class JobController extends Controller
         ]);
     }
 
-//Update job 
+//Update job
     public function UpdateJob(Request $request ,$id) {
         $validator = Validator::make($request->all(), [
             'title' => 'required',
@@ -54,6 +62,7 @@ class JobController extends Controller
             'email'  => ['required', 'email'],
             'website' => 'required',
             'description' => 'required',
+            'logo' => File::types(['jpg', 'png', 'svg'])->max(1024),
         ]);
 
         $larajob = LaraJobs::find($id);
@@ -69,7 +78,13 @@ class JobController extends Controller
 
     ]);
 
-    return back()->with('message', 'Succesfully updated');
+        if ($request->hasFile('logo')) {
+            $larajob->update([
+                'logo' => $request->file('logo')->store('logos', 'public'),
+            ]);
+        }
+
+    return redirect('/')->with('success', 'Succesfully updated');
 
     }
 
