@@ -65,14 +65,11 @@ class UserController extends Controller
 
         $credentials = $request->only('email', 'password');
         if(Auth::attempt($credentials)){
-            return view('index', ['larajobs' => LaraJobs::all()]);
-
+            return redirect('/')->with('success', 'Logged in');
         }
         else{
             return back()->with('error', "Invalid Email or Password");
         }
-
-
     }
 
 
@@ -80,7 +77,7 @@ class UserController extends Controller
         auth()->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('login')->with('message', 'Logged out succesfully');
+        return redirect('/')->with('message', 'Logged out succesfully');
 
     }
 }
