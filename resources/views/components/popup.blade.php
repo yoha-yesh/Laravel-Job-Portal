@@ -15,7 +15,7 @@
             x-show="show"
         >
             <i class="fa-solid fa-bell"></i>
-            {{session('message')}}
+            {{session('success')}}
         </div>
     @else
         @if (session()->has('error'))
@@ -25,7 +25,7 @@
                 x-show="show"
             >
                 <i class="fa-solid fa-bell"></i>
-                {{session('message')}}
+                {{session('error')}}
             </div>
         @endif
     @endif
