@@ -17,25 +17,6 @@
                     <form action="/login" method="post">
                         @csrf
 
-                    @if(session('success'))
-                        <div class="w-100% bg-green-500 text-center p-5 mb-5">
-                             <p class="text-white text-center w-100%">{{session('success')}}</p>
-                        </div>
-                        @endif
-
-                        @if(session('error'))
-                        <div class="w-100% bg-red-500 text-center p-5 mb-4">
-                             <p class="text-white text-center w-100%">{{session('error')}}</p>
-                        </div>
-                        @endif
-
-                        @if(session('message'))
-                        <div class="w-100% bg-green-500 text-center p-5 mb-4">
-                             <p class="text-white text-center w-100%">{{session('message')}}</p>
-                        </div>
-                        @endif
-
-                        
                         <div class="mb-6">
                             <label for="email" class="inline-block text-lg mb-2"
                                 >Email</label
