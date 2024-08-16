@@ -2,12 +2,12 @@
 
 @section('content')
 
-        
+
     <body class="mb-48">
     <x-nav></x-nav>
 
         <main>
-           
+
             <!-- Search -->
             <form action="/manage">
                 <div class="relative border-2 border-gray-100 m-4 rounded-lg">
@@ -50,9 +50,9 @@
                                     <td
                                         class="px-4 py-8 border-t border-b border-gray-300 text-lg"
                                     >
-                                        <a href="show.html">
+                                        <a href="/jobs/{{$larajob->id}}">
                                             {{$larajob->title}}
-                                            
+
                                         </a>
                                     </td>
                                     <td
@@ -83,9 +83,9 @@
                                     </td>
                                 </tr>
                             @endforeach
-                            
 
-                           
+
+
                         </tbody>
                     </table>
                 </div>
