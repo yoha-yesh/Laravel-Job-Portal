@@ -14,9 +14,6 @@
                         <p class="mb-4">Post a gig to find a developer</p>
                     </header>
 
-                    @if(session('message'))
-                    <div class="bg-green-500">{{session('message')}}</div>
-                    @endif
 
                     <form action="{{route('create.job')}}" method="post" enctype="multipart/form-data">
                         @csrf

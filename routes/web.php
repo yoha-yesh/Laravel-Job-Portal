@@ -7,6 +7,7 @@ use App\Http\Controllers\JobController;
 use App\Http\Controllers\UserController;
 
 Route::get('/', [JobController::class, 'index']);
+
 Route::get('/jobs/{job}', [JobController::class, 'show']);
 
 Route::get('/register', function () {
@@ -51,24 +52,14 @@ Route::get('create', function(){
 Route::post('create/job', [JobController::class, 'storeJob'])->name('create.job');
 
 
-// Route::get('/?tag={tag}', function($tag){
 
-//     dd(LaraJobs::where('tags', $))
-
-
-// });
 
 
 
 
 //MANAGE JOBS ROUTE
 
-Route::get('manage', function(){
-    return view('manage', [
-        "LaraJobs" => LaraJobs::all()
-    ]);
-})->name('manage');
-
+Route::get('/manage', [JobController::class, 'manage'])->name('manage');
 
 //EDIT THE JOB PAGE DISPLAY ROUTE
 

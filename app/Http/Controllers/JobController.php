@@ -18,7 +18,13 @@ class JobController extends Controller
         ]);
     }
 
+    public function manage(){
+        return view('manage', [
+            'LaraJobs' => LaraJobs::latest()
+                ->filter(request(['tag','search']))->get()
+        ]);
 
+    }
     public function storeJob(Request $request) {
         $validator = Validator::make($request->all(), [
             'title' => 'required',
@@ -43,7 +49,7 @@ class JobController extends Controller
 
         LaraJobs::create($formFields);
 
-        return redirect('/')->with('message', 'created succesfully');
+        return redirect('/')->with('message', 'Created succesfully');
     }
 
     public function show(LaraJobs $job) {
@@ -93,7 +99,7 @@ class JobController extends Controller
     public function deleteJob($id){
         $larajob = LaraJobs::find($id);
         $larajob->delete();
-        return back();
+        return back()->with('success', 'Deleted Succesfully');
 
     }
 }
