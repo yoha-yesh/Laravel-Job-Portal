@@ -14,16 +14,18 @@ Route::get('/register', function () {
     return view('register_employer');
 })->name('register');
 
-// Route::get('/register/employer', function () {
-//     return view('register_employer');
-// })->name('register.employer');
+Route::get('/register/employee', function () {
+    return view('register_employee');
+})->name('register.employee');
 
 Route::get('/login', function () {
     return view('login');
 })->name('login');
 
 
-
+Route::get('/register/employer_seeker', function () {
+    return view('employer_seeker');
+})->name('employer.seeker');
 
 
 
