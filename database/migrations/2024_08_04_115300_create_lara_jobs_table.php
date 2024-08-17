@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('lara_jobs', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->integer('user_id');
             $table->string('tags');
             $table->string('logo')->nullable();
             $table->string('company');

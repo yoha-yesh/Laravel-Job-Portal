@@ -30,6 +30,7 @@ class LaraJobs extends Model
         'website',
         'description',
         'logo',
+        'user_id'
 
     ];
 }

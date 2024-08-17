@@ -47,7 +47,7 @@ Route::get('/employer/seeker' ,function(){
 // create Page
 Route::get('create', function(){
     return view('create');
-})->name('create');
+})->name('create')->middleware('auth');
 
 Route::post('create/job', [JobController::class, 'storeJob'])->name('create.job');
 
@@ -59,7 +59,7 @@ Route::post('create/job', [JobController::class, 'storeJob'])->name('create.job'
 
 //MANAGE JOBS ROUTE
 
-Route::get('/manage', [JobController::class, 'manage'])->name('manage');
+Route::get('/manage', [JobController::class, 'manage'])->name('manage')->middleware('auth');
 
 //EDIT THE JOB PAGE DISPLAY ROUTE
 
@@ -71,10 +71,10 @@ Route::get('/job/edit/{id}', function($id){
 
 
 //Edit the job
-Route::put('update/job/{id}', [JobController::class, 'updateJob'])->name('update.job');
+Route::put('update/job/{id}', [JobController::class, 'updateJob'])->name('update.job')->middleware('auth');
 
 //DELETE THE JOB
-Route::delete('delete/job/{id}', [JobController::class, 'deleteJob'])->name('delete.job');
+Route::delete('delete/job/{id}', [JobController::class, 'deleteJob'])->name('delete.job')->middleware('auth');
 
 
 ?>

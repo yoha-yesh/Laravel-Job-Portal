@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\LaraJobs;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\File;
+use Illuminate\Support\Facades\Validator;
 
 class JobController extends Controller
 {
@@ -20,8 +22,8 @@ class JobController extends Controller
 
     public function manage(){
         return view('manage', [
-            'LaraJobs' => LaraJobs::latest()
-                ->filter(request(['tag','search']))->get()
+            'LaraJobs' => LaraJobs::latest()->where('user_id', Auth::user()->id)
+                ->filter(request(['search']))->get()
         ]);
 
     }
@@ -41,7 +43,19 @@ class JobController extends Controller
             return redirect('/create')->withErrors($validator)->withInput();
         }
 
-        $formFields = $validator->validated();
+        $formFields = [
+            'title' => $request->title,
+            'user_id' => Auth::user()->id,
+            'tags' => $request->tags,
+            'company' => $request->company,
+            'location' => $request->location,
+            'email'  => $request->email,
+            'website' => $request->website,
+            'description' => $request->description,
+            'logo' => $request->logo,
+
+        ];
+        
 
         if ($request->hasFile('logo')) {
             $formFields['logo'] = $request->file('logo')->store('logos', 'public');
